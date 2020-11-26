@@ -6,10 +6,8 @@ class EcommercesController < ApplicationController
 
   private
   def check_user_sign_up
-    if session[:current_user] > 0
-
-    else
-
+    unless  session[:current_user].present?
+      redirect_to login_path
     end
   end
 end
