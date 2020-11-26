@@ -26,5 +26,5 @@ require('jquery')
 
 
 $(document).ready(function (){
-  $(".error_message").hide(2000);
+  $(".error_message").hide(4000);
 });

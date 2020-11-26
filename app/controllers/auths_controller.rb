@@ -11,14 +11,24 @@ class AuthsController < ApplicationController
   def forget_password
 
   end
-  # def validate_user
-  #
-  # end
-  #
+
+  def validate_user
+    @user = User.where(email: params[:email], password: params[:password])
+    if @user.present?
+      session[:current_user] >> @user
+      flash[:notice] = "Welcome to the Ecommerce Website where you find everything"
+
+    else
+      flash[:alert] = "Please check the credentials"
+      redirect_to auths_path
+    end
+  end
+
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to admin_users_path
+      flash[:notice] = "You have been register successfully Thank!"
+      redirect_to auths_path
     else
       render new_auth_path
     end
@@ -27,6 +37,10 @@ class AuthsController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:name, :email, :password,:password_confirmation)
+  end
+
+  def permit_login_params
+    params.permit[:email,:password]
   end
 
 
