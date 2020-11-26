@@ -3,4 +3,6 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :password, presence: true
   validates :password, confirmation: { case_sensitive: true }
+  validates :email, uniqueness: true
+
 end
