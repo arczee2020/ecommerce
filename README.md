@@ -10,4 +10,7 @@ sqllite3
 
 #Gem
 bootstrap for the styling of the website
+
 Faker gem  it is use to seed the data 
+
+Add jquery using the yarn
