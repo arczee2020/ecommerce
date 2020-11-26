@@ -7,7 +7,7 @@ class EcommercesController < ApplicationController
   private
   def check_user_sign_up
     unless  session[:current_user].present?
-      redirect_to login_path
+      redirect_to auths_path
     end
   end
 end
