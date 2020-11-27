@@ -4,6 +4,10 @@ class EcommercesController < ApplicationController
 
   end
 
+  def show
+
+  end
+
   private
   def check_user_sign_up
     unless  session[:current_user].present?

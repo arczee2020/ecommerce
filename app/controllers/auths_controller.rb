@@ -15,8 +15,9 @@ class AuthsController < ApplicationController
   def validate_user
     @user = User.where(email: params[:email], password: params[:password])
     if @user.present?
-      session[:current_user] >> @user
+      session[:current_user].push(@user)
       flash[:notice] = "Welcome to the Ecommerce Website where you find everything"
+      redirect_to root_path
 
     else
       flash[:alert] = "Please check the credentials"
