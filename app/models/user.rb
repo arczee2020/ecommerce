@@ -5,4 +5,6 @@ class User < ApplicationRecord
   validates :password, confirmation: { case_sensitive: true }
   validates :email, uniqueness: true
 
+  has_many :products
+
 end
