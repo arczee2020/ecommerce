@@ -5,5 +5,8 @@ Rails.application.routes.draw do
   post '/validate', to: 'auths#validate_user', as: 'validate_user'
   resources :auths
   resources :ecommerces
+  resources :carts
+  get '/logout', to: 'auths#log_out', as: 'logout'
+  get '/add', to: 'ecommerces#add_product', as: 'add_product'
 
 end

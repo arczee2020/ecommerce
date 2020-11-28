@@ -1,8 +1,17 @@
 class AuthsController < ApplicationController
   def index
-    file = Dir.glob("#{Rails.root}/public/product/data.csv")
-    file.each do |file|
-      Product.import(file)
+    if session[:data_scrape].nil?
+      file = Dir.glob("#{Rails.root}/public/product/data.csv")
+      file.each do |file|
+        Product.import(file)
+        session[:data_scrape] = true
+      end
+      1.upto(200) do |i|
+        Cart.create!(
+            user_id: "#{i}",
+            product_id: "#{i}"
+        )
+        end
     end
   end
 
@@ -17,10 +26,9 @@ class AuthsController < ApplicationController
   def validate_user
     @user = User.where(email: params[:email], password: params[:password])
     if @user.present?
-      session[:current_user].push(@user)
+      session[:current_user] = @user
       flash[:notice] = "Welcome to the Ecommerce Website where you find everything"
       redirect_to root_path
-
     else
       flash[:alert] = "Please check the credentials"
       redirect_to auths_path
@@ -37,6 +45,12 @@ class AuthsController < ApplicationController
     end
   end
 
+  def log_out
+    session[:current_user].clear
+    flash[:alert] = "you are logout from the website"
+    redirect_to auths_path
+  end
+
   private
   def user_params
     params.require(:user).permit(:name, :email, :password,:password_confirmation)
@@ -45,6 +59,13 @@ class AuthsController < ApplicationController
   def permit_login_params
     params.permit[:email,:password]
   end
+
+  def check_user_sign_up
+    if session[:current_user].nil?
+      redirect_to auths_path
+    end
+  end
+
 
 
 end

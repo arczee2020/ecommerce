@@ -22,5 +22,3 @@ puts "400 Records of User created"
       password: 'password'
   )
 end
-
-puts "400 Orders has been created"
