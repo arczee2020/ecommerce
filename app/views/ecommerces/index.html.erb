@@ -11,20 +11,10 @@
       </div>
     <% end %>
   </div>
-  <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-          <a class="nav-item nav-link" href="#">Features</a>
-          <a class="nav-item nav-link" href="#">Pricing</a>
-          <a class="nav-item nav-link disabled" href="#">Disabled</a>
-        </div>
-      </div>
+  <div class="container-fluid">
+    <div class="col-lg-12 col-12">
+
+    </div>
   </div>
 <section class="banner-bottom py-5">
   <div class="container py-5">
@@ -57,7 +47,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-3 shop-info-grid text-center mt-4">
+      <div class="col-lg-3 col-sm-3 shop-info-grid text-center mt-4">
         <div class="product-shoe-info shoe">
           <div class="men-thumb-item">
             <img src="images/b2.jpg" class="img-fluid" alt="">
@@ -362,21 +352,7 @@
     </div>
     <nav aria-label="Page navigation example mt-5">
       <ul class="pagination">
-        <li class="page-item">
-          <a class="page-link" href="#">Previous</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">1</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">2</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">3</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">Next</a>
-        </li>
+          <%= will_paginate @products %>
       </ul>
     </nav>
   </div>

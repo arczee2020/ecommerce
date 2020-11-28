@@ -1,7 +1,10 @@
 class AuthsController < ApplicationController
 
   def index
-
+    file = Dir.glob("#{Rails.root}/public/product/data.csv")
+    file.each do |file|
+      Product.import(file)
+    end
   end
 
   def new

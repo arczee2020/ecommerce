@@ -1,7 +1,7 @@
 class EcommercesController < ApplicationController
   before_action :check_user_sign_up
   def index
-
+    @products = Product.paginate(page: params[:page], per_page: 30)
   end
 
   def show

@@ -3,10 +3,6 @@ class ApplicationController < ActionController::Base
 
   def initialize_session
     session[:current_user] ||= []
-    file = Dir.glob("#{Rails.root}/public/product/data.csv")
-    file.each do |file|
-      Product.import(file)
-    end
   end
 
 

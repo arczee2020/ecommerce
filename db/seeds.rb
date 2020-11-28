@@ -6,7 +6,15 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+puts "Admin has been created"
+User.create(
+    name: 'Admin',
+    email: 'admin@ecommerce.com',
+    password: 'password',
+    role: 'admin'
+)
 require 'faker'
+puts "400 Records of User created"
 1.upto(400) do
   User.create(
       name: Faker::Name.unique.name,
@@ -14,3 +22,5 @@ require 'faker'
       password: 'password'
   )
 end
+
+puts "400 Orders has been created"
