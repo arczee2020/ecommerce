@@ -2,6 +2,12 @@ class Product < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
+  validates :title, presence: true
+  validates :price, presence: true
+  validates :description, presence: true
+  validates :product_description, presence: true
+  validates :image , presence: true
+
   def self.import(file)
     counter =0
     CSV.foreach(file.pathmap, headers: true) do |row|

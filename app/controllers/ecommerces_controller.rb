@@ -10,12 +10,18 @@ class EcommercesController < ApplicationController
   end
 
   def create
-
+    @product  =  User.find(session[:current_user][0]['id']).products.new(product_params)
+    if @product.save
+      session[:notice] = "Product added successfully"
+      redirect_to ecommerces_path
+    else
+      render 'new'
+    end
   end
 
   def show
     @products_row = Product.limit(4)
-    @product = Product.find(params[:id]) if params[:id].present?
+    @product =   Product.find(params[:id]) if params[:id].present?
   end
 
   private
@@ -23,5 +29,9 @@ class EcommercesController < ApplicationController
     if session[:current_user].nil?
       redirect_to auths_path
     end
+  end
+
+  def product_params
+    params.require(:product).permit(:title,:description,:image,:price,:product_description)
   end
 end
