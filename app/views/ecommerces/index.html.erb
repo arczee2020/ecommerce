@@ -35,8 +35,11 @@ s <div class="container">
               </h4>
               <div class="product_price">
                 <div class="grid-price">
-                  <span class="money"><%= product.price %></span>
+                  <span class="money"><%= number_to_currency(product.price) %></span>
                 </div>
+              </div>
+              <div class="col-12 col-sm-12">
+                <%= link_to 'Show', ecommerce_path(product.id) , class: 'btn btn-block btn-success' %>
               </div>
             </div>
           </div>
@@ -45,7 +48,7 @@ s <div class="container">
     </div>
     <nav aria-label="Page navigation example mt-5">
       <ul class="pagination">
-          <%#= will_paginate @products %>
+          <%= will_paginate @products %>
       </ul>
     </nav>
   </div>
