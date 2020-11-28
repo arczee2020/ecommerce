@@ -1,9 +1,10 @@
 class AuthsController < ApplicationController
   def index
-    if session[:current_user].nil?
+    if session[:data_scrape]  == false
       file = Dir.glob("#{Rails.root}/public/product/data.csv")
       file.each do |file|
         Product.import(file)
+        session[:data_scrape] = true
       end
     end
   end
@@ -38,6 +39,12 @@ class AuthsController < ApplicationController
     end
   end
 
+  def log_out
+    session[:current_user] = nil
+    flash[:alert] = "you are logout from the website"
+    redirect_to auths_path
+  end
+
   private
   def user_params
     params.require(:user).permit(:name, :email, :password,:password_confirmation)
@@ -46,6 +53,7 @@ class AuthsController < ApplicationController
   def permit_login_params
     params.permit[:email,:password]
   end
+
 
 
 end
