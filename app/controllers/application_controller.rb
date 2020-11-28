@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   def initialize_session
     if session[:current_user].nil?
       session[:current_user] = nil
+      session[:cart] ||= []
     end
     if session[:data_scrape].nil?
       session[:data_scrape] = nil
