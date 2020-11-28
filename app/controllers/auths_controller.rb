@@ -1,4 +1,5 @@
 class AuthsController < ApplicationController
+  skip_before_action :check_user_sign_up ,only: [:index, :new]
   def index
     if session[:data_scrape]  == false
       file = Dir.glob("#{Rails.root}/public/product/data.csv")
@@ -52,6 +53,12 @@ class AuthsController < ApplicationController
 
   def permit_login_params
     params.permit[:email,:password]
+  end
+
+  def check_user_sign_up
+    if session[:current_user].nil?
+      redirect_to auths_path
+    end
   end
 
 

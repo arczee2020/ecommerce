@@ -17,6 +17,7 @@ class Product < ApplicationRecord
           product = Product.new(title:row['product_name'],manufacturer: row['manufacturer'],price: row['price'],product_description: row['product_information'], description: row['description'],user: User.first)
           product.image.attach(io: File.open("./app/assets/images/#{rand(1..5)}.jpg"), filename: "#{rand(1..5)}.jpg")
           product.save
+
         rescue StandardError => e
           print e
         end
