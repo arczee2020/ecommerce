@@ -4,6 +4,15 @@ class EcommercesController < ApplicationController
      @products = Product.paginate(page: params[:page], per_page: 30).limit(100)
   end
 
+
+  def new
+    @product =  Product.new
+  end
+
+  def create
+
+  end
+
   def show
     @products_row = Product.limit(4)
     @product = Product.find(params[:id]) if params[:id].present?

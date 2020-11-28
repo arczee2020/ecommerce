@@ -12,7 +12,10 @@ s <div class="container">
         <a href="register.html" class="btn"><span class="fa fa-pencil-square-o"></span> Sign Up</a>
       </div>
       <%else%>
-         <%= session[:current_user][0]%>
+         <% if session[:current_user][0]['role'] == "admin"%>
+           <%= link_to 'Add Product', new_ecommerce_path, class: 'btn btn-warning', style: 'color: white;
+    padding-top: 16px;' %>
+        <%end%>
     <% end %>
   </div>
   <div class="container-fluid">
