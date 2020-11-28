@@ -2,7 +2,7 @@ class CartsController < ApplicationController
   before_action :check_user_sign_up
 
   def index
-
+    @cart = Cart.all
   end
 
   def create
@@ -21,7 +21,8 @@ class CartsController < ApplicationController
   end
 
   def show
-
+    @products_row = Product.limit(4)
+    @product =   Product.find(params[:id]) if params[:id].present?
   end
 
   private

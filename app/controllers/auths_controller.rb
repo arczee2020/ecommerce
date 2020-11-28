@@ -1,12 +1,17 @@
 class AuthsController < ApplicationController
-  skip_before_action :check_user_sign_up ,only: [:index, :new]
   def index
-    if session[:data_scrape]  == false
+    if session[:data_scrape].nil?
       file = Dir.glob("#{Rails.root}/public/product/data.csv")
       file.each do |file|
         Product.import(file)
         session[:data_scrape] = true
       end
+      1.upto(200) do |i|
+        Cart.create!(
+            user_id: "#{i}",
+            product_id: "#{i}"
+        )
+        end
     end
   end
 
@@ -41,7 +46,7 @@ class AuthsController < ApplicationController
   end
 
   def log_out
-    session[:current_user] = nil
+    session[:current_user].clear
     flash[:alert] = "you are logout from the website"
     redirect_to auths_path
   end

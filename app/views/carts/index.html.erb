@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <div class="col-12 col-sm-12">
+    <table class="table" style="color: white;">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Price</th>
+        <th scope="col">Show</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% if @cart.present? %>
+      <%counter = 1 %>
+        <% @cart.each  do |item| %>
+          <tr>
+            <th scope="row"><%= counter%></th>
+            <td><%= Product.find(item.product_id).title %></td>
+            <td><%= Product.find(item.product_id).description %></td>
+            <td><%= number_to_currency(Product.find(item.product_id).price) %></td>
+            <td><%= link_to "Show", cart_path(id: Product.find(item.product_id).id )  %></td>
+          </tr>
+      <%counter = counter + 1 %>
+        <% end %>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

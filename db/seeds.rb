@@ -22,11 +22,3 @@ puts "400 Records of User created"
       password: 'password'
   )
 end
-
-puts "400 Orders has been created"
-1.upto(400) do
-  Cart.create(
-      user_id: "#{i}",
-      product_id: "#{i}"
-  )
-end
