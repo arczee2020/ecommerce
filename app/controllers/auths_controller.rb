@@ -1,8 +1,10 @@
 class AuthsController < ApplicationController
   def index
-    file = Dir.glob("#{Rails.root}/public/product/data.csv")
-    file.each do |file|
-      Product.import(file)
+    if session[:current_user].nil?
+      file = Dir.glob("#{Rails.root}/public/product/data.csv")
+      file.each do |file|
+        Product.import(file)
+      end
     end
   end
 
@@ -20,7 +22,6 @@ class AuthsController < ApplicationController
       session[:current_user] = @user
       flash[:notice] = "Welcome to the Ecommerce Website where you find everything"
       redirect_to root_path
-
     else
       flash[:alert] = "Please check the credentials"
       redirect_to auths_path

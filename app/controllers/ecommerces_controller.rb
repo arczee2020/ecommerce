@@ -20,7 +20,7 @@ class EcommercesController < ApplicationController
 
   private
   def check_user_sign_up
-    unless  session[:current_user].present?
+    if session[:current_user].nil?
       redirect_to auths_path
     end
   end
