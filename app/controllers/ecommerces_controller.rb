@@ -1,7 +1,14 @@
 class EcommercesController < ApplicationController
   before_action :check_user_sign_up
   def index
-     @products = Product.paginate(page: params[:page], per_page: 30).limit(100)
+    search
+    if params[:search_name]
+      debugger
+      @products = Product.where("title LIKE ?", "%#{params[:search_name].titleize}%").paginate(page: params[:page], per_page: 30)
+      session[:search_name].clear
+    else
+      @products = Product.paginate(page: params[:page], per_page: 30)
+    end
   end
 
 
@@ -33,5 +40,12 @@ class EcommercesController < ApplicationController
 
   def product_params
     params.require(:product).permit(:title,:description,:image,:price,:product_description)
+  end
+
+  def search
+    session[:search_name] ||= params[:search_name]
+    session[:filter] = params[:filter]
+    params[:filter_option] = nil if params[:filter_option] == ""
+    session[:filter_option] = params[:filter_option]
   end
 end
