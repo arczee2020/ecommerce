@@ -11,6 +11,8 @@ s <div class="container">
         <a href="login.html" class="btn"><span class="fa fa-user-circle-o"></span> Sign In</a>
         <a href="register.html" class="btn"><span class="fa fa-pencil-square-o"></span> Sign Up</a>
       </div>
+      <%else%>
+         <%= session[:current_user][0]%>
     <% end %>
   </div>
   <div class="container-fluid">
