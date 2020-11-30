@@ -3,7 +3,6 @@ class EcommercesController < ApplicationController
   def index
     search
     if params[:search_name]
-      debugger
       @products = Product.where("title LIKE ?", "%#{params[:search_name].titleize}%").paginate(page: params[:page], per_page: 30)
       session[:search_name].clear
     else
