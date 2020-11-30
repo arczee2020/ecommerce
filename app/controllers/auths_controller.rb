@@ -23,6 +23,10 @@ class AuthsController < ApplicationController
 
   end
 
+  def guest_login
+    session[:guest] = true
+  end
+
   def validate_user
     @user = User.where(email: params[:email], password: params[:password])
     if @user.present?
@@ -47,6 +51,7 @@ class AuthsController < ApplicationController
 
   def log_out
     session[:current_user].clear
+    Product.destroy_all
     flash[:alert] = "you are logout from the website"
     redirect_to auths_path
   end

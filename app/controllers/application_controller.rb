@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
     if session[:current_user].nil?
       session[:current_user] = nil
       session[:cart] ||= []
+      session[:guest] = nil
     end
     if session[:data_scrape].nil?
       session[:data_scrape] = nil

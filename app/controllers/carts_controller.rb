@@ -27,7 +27,7 @@ class CartsController < ApplicationController
 
   private
   def check_user_sign_up
-    if session[:current_user].nil?
+    if session[:current_user].nil? || session[:guest_login] == true
       redirect_to auths_path
     end
   end
