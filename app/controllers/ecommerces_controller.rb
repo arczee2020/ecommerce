@@ -32,8 +32,10 @@ class EcommercesController < ApplicationController
 
   private
   def check_user_sign_up
-    if session[:current_user].nil?
+    if session[:current_user].nil? || session[:guest].nil?
       redirect_to auths_path
+    else
+      redirect_to ecommerces_path
     end
   end
 

@@ -25,6 +25,7 @@ class AuthsController < ApplicationController
 
   def guest_login
     session[:guest] = true
+    redirect_to ecommerces_path
   end
 
   def validate_user
