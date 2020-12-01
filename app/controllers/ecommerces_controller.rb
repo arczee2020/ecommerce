@@ -30,12 +30,9 @@ class EcommercesController < ApplicationController
     @product =   Product.find(params[:id]) if params[:id].present?
   end
 
-  private
   def check_user_sign_up
-    if session[:current_user].nil? || session[:guest].nil?
+    if session[:current_user].nil?
       redirect_to auths_path
-    else
-      redirect_to ecommerces_path
     end
   end
 

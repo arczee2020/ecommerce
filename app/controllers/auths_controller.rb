@@ -1,6 +1,7 @@
 class AuthsController < ApplicationController
   def index
     if session[:data_scrape].nil?
+      Product.destroy_all
       file = Dir.glob("#{Rails.root}/public/product/data.csv")
       file.each do |file|
         Product.import(file)
@@ -24,7 +25,7 @@ class AuthsController < ApplicationController
   end
 
   def guest_login
-    session[:guest] = true
+    session[:current_user] = [{ "role": "guest"}]
     redirect_to ecommerces_path
   end
 
@@ -52,7 +53,6 @@ class AuthsController < ApplicationController
 
   def log_out
     session[:current_user].clear
-    Product.destroy_all
     flash[:alert] = "you are logout from the website"
     redirect_to auths_path
   end
